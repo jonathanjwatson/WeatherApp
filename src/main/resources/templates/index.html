@@ -34,7 +34,8 @@
 				</form>
 				<hr>
 			</div>
-			<div class="col col-md-6 offset-md-3 alert alert-danger" role="alert" th:if="${data != null && data.name == 'error'}">
+			<div class="col col-md-6 offset-md-3 alert alert-danger" role="alert"
+				th:if="${data != null && data.name == 'error'}">
 				<span>
 					Invalid zip code. Weather data not found.</span>
 			</div>
@@ -50,8 +51,13 @@
                 + data.weather[0].get('icon') + '.png'}}">
 				</p>
 			</div>
+			<div class="col col-md-6 offset-md-3">
+				<h3>Recent searches</h3>
+				<ul th:each="zipCode : ${zipCodes}">
+					<li th:text="${zipCode.number}"></li>
+				</ul>
+			</div>
 		</div>
-	</div>
 </body>
 
 </html>

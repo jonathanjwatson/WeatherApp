@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.tts.WeatherApp.service.ZipCodeService;
+
 @Controller
 public class WeatherController {
 	@Autowired
 	private WeatherService weatherService;
+	@Autowired
+	private ZipCodeService zipCodeService;
 
 //    @GetMapping
 //    public String getIndex(Model model) {
@@ -20,6 +24,7 @@ public class WeatherController {
 	@GetMapping
 	public String getIndex(Model model) {
 		model.addAttribute("request", new Request());
+		model.addAttribute("zipCodes", zipCodeService.getAllZipCodes());
 		return "index";
 	}
 
@@ -28,6 +33,7 @@ public class WeatherController {
 //		System.out.printf("ZIP CODE: %s", request.getZipCode());
 		Response data = weatherService.getForecast(request.getZipCode());
 		model.addAttribute("data", data);
+		model.addAttribute("zipCodes", zipCodeService.getAllZipCodes());
 		return "index";
 	}
 }
